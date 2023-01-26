@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<timeline>
+  <name>絶オメガ検証戦</name>
+  <rev>1.0</rev>
+  <description>
+  </description>
+  <author>ellen.islay</author>
+  <license>CC BY-NC</license>
+  <zone>The Omega Protocol (Ultimate)</zone>
+  <locale>JA</locale>
+  <start>0039::戦闘開始！</start>
+  <entry>ENTRY</entry>
+
+  <default target_-element="Activity" target_-attr="notice-o" value="-3" />
+
+  <expressions>
+    <set name="target_type" value="false" />
+    <set name="pantokrator" value="false" />
+  </expressions>
+  <s name="ENTRY">
+    <a time="8" text="開始状態の判別" icon="分岐.png" />
+    <t sync="オメガは「サークルプログラム」の構え。">
+      <load target="オメガP1" truncate="true" />
+    </t>
+  </s>
+  <s name="オメガP1">
+    <a time="010" text="サークルプログラム" sync="" />
+    <a time="020" text="ブラスター1回目" sync="オメガは「ブラスター」の構え" notice=""/>
+    <a time="030" text="ブラスター2回目" sync="オメガの「ブラスター」" sync-s="-3" sync-e="3" sync-count="1" />
+    <a time="040" text="ブラスター3回目" sync="オメガの「ブラスター」" sync-s="-3" sync-e="3" sync-count="2" />
+    <a time="050" text="ブラスター4回目" sync="オメガの「ブラスター」" sync-s="-3" sync-e="3" sync-count="3" />
+
+    <a time="064" text="【詠唱】パンクラ" sync="オメガは「パントクラトル」の構え。" notice="パンクラ" />
+    <a time="069" text="パントクラトル" sync="オメガの「パントクラトル」" notice="デバフを確認" />
+    <a time="109" text="拡散波動砲P5" sync="^15:[id8]:オメガ:[id4]:拡散波動砲P:[id8]:" sync-count="1" />
+    <a time="111" text="拡散波動砲P4" />
+    <a time="113" text="拡散波動砲P3" />
+    <a time="115" text="拡散波動砲P2" />
+    <a time="117" text="拡散波動砲P1" />    
+    <a time="124" text="アトミックレイ" sync="時間切れ" />
+
+  
+    <t sync="^1A:[id8]:[me] gains the effect of ファーストターゲット" notice="いち">
+      <expressions>
+        <pre name="pantokrator" value="false" />
+        <set name="target_type" value="1st" />
+      </expressions>
+      <v-notice
+        text=""
+        duration="30" />
+    </t>
+    <t sync="^1A:[id8]:[me] gains the effect of セカンドターゲット" notice="に！">
+      <expressions>
+        <pre name="pantokrator" value="false" />
+        <set name="target_type" value="2nd" />
+      </expressions>
+      <v-notice
+        text=""
+        duration="30" />
+    </t>
+    <t sync="^1A:[id8]:[me] gains the effect of サードターゲット" notice="さん！">
+      <expressions>
+        <pre name="pantokrator" value="false" />
+        <set name="target_type" value="3rd" />
+      </expressions>
+      <v-notice
+        text=""
+        duration="30" />
+    </t>
+    <t sync="^1A:[id8]:[me] gains the effect of フォースターゲット" notice="よん">
+      <expressions>
+        <pre name="pantokrator" value="false" />
+        <set name="target_type" value="4th" />
+      </expressions>      
+      <v-notice
+        text=""
+        duration="30" />
+    </t>
+  
+    <t sync="オメガは「ブラスター」の構え" sync-count="1" notice="線取って">
+      <expressions>
+        <pre name="target_type" value="3rd" />
+      </expressions>
+    </t>
+    <t sync="オメガの「ブラスター」" sync-count="1" notice="線取って">
+      <expressions>
+        <pre name="target_type" value="4th" />
+      </expressions>
+    </t>
+    <t sync="オメガの「ブラスター」" sync-count="2" notice="線取って">
+      <expressions>
+        <pre name="target_type" value="1st" />
+      </expressions>      
+    </t>
+    <t sync="オメガの「ブラスター」" sync-count="3" notice="線取って">
+      <expressions>
+        <pre name="target_type" value="2nd" />
+      </expressions>
+    </t>
+
+    <t sync="オメガは「ブラスター」の構え" sync-count="1" notice="塔踏んで">
+      <expressions>
+        <pre name="target_type" value="1st" />
+      </expressions>
+    </t>
+    <t sync="オメガの「ブラスター」" sync-count="1" notice="塔踏んで">
+      <expressions>
+        <pre name="target_type" value="2nd" />
+      </expressions>      
+    </t>
+    <t sync="オメガの「ブラスター」" sync-count="2" notice="塔踏んで">  
+      <expressions>
+        <pre name="target_type" value="3rd" />
+      </expressions>      
+    </t>
+    <t sync="オメガの「ブラスター」" sync-count="3" notice="塔踏んで">
+      <expressions>
+        <pre name="target_type" value="4th" />
+      </expressions>
+    </t>
+  
+    <!-- パンクラ用の変数を初期化 -->
+    <t sync="オメガ:パントクラトル・モード実行…… 思考リソース……武装生成に割譲……ガガガ……。">
+      <expressions>
+        <set name="target_type" value="false" />
+        <set name="pantokrator" value="true" />
+      </expressions>
+    </t>
+    
+    <t sync="^1A:[id8]:[me] gains the effect of ファーストターゲット" notice="いち！！ミサイル捨てて" notice-o="4">
+      <expressions>
+        <pre name="pantokrator" value="true" />
+      </expressions>
+      <set name="target_type" value="1st" />
+      <v-notice
+        text=""
+        duration="30" />
+    </t>
+    <t sync="^1A:[id8]:[me] gains the effect of セカンドターゲット" notice="に！！ミサイル捨てて" notice-o="10">
+      <expressions>
+        <pre name="pantokrator" value="true" />
+      </expressions>
+      <set name="target_type" value="2nd" />
+      <v-notice
+        text=""
+        duration="30" />
+    </t>
+    <t sync="^1A:[id8]:[me] gains the effect of サードターゲット" notice="さん！！ミサイル捨てて" notice-o="16">
+      <expressions>
+        <pre name="pantokrator" value="true" />
+      </expressions>
+      <set name="target_type" value="3rd" />
+      <v-notice
+        text=""
+        duration="30" />
+    </t>
+    <t sync="^1A:[id8]:[me] gains the effect of フォースターゲット" notice="よん！ミサイル捨てて" notice-o="22">
+      <expressions>
+        <pre name="pantokrator" value="true" />
+      </expressions>
+      <set name="target_type" value="4th" />
+      <v-notice
+        text=""
+        duration="30" />
+    </t>
+  </s>
+</timeline>
